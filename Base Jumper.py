@@ -49,16 +49,15 @@ def convert_to_b10(num, og_base):
 
 def convert_larger_base_to_b10(num, og_base):
      number_string = str(num)
+     number_string = number_string.lower()
      number_list = []
      for number in number_string:
          number_list.append(number)
-     print(number_list)
      back_to_int = 0
      for index, digit in enumerate(number_list):
          if digit in alphabet: #To deal with converting values above base 10 back to base 10 then convert
              digit_value = alphabet.index(digit) + 10
              digit_value = digit_value * pow(og_base, (len(number_string) - index- 1))
-             print(digit_value)
              back_to_int += int(digit_value)
          else:
              if number_string.index(digit) < (len(number_string) - 1):
@@ -94,4 +93,4 @@ def base_jumper(num, og_base, wan_base):
     final_string = string_a[::-1] # Reverses the string to the correct form
     return final_string
 
-print(base_jumper('a64a2', 12, 16))
+print(base_jumper('A64A2', 12, 16))
