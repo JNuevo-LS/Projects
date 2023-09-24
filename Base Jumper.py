@@ -91,6 +91,6 @@ def base_jumper(num, og_base, wan_base):
     else:
         string_a = base_above(num, og_base, wan_base)
     final_string = string_a[::-1] # Reverses the string to the correct form
-    return final_string
+    return final_string.upper()
 
 print(base_jumper('A64A2', 12, 16))
