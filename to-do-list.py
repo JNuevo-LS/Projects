@@ -25,7 +25,7 @@ L = tk.Listbox(window, bg='#77866A', highlightbackground='#77866A', bd=0)
 
 #On open, read and add to listbox
 
-previous_list_data = open(r'C:\Users\jorge\OneDrive\Documents\Coding (;\listbox_data.txt', 'r')
+previous_list_data = open(r'listbox_data.txt', 'r')
 previous_lines = previous_list_data.readlines()
 for line in previous_lines:
     if line == '':
@@ -62,7 +62,7 @@ def move_window(event):
 #Save content
 # Still working on the ability to save the to-do-list items
 def save_list_data(): 
-    listbox_data = open(r'C:\Users\jorge\OneDrive\Documents\Coding (;\listbox_data.txt', 'w')
+    listbox_data = open(r'listbox_data.txt', 'w')
     for item in L.get(0, tk.END):
         item = item.rstrip('\n')
         listbox_data.write(str(item) + '\n')
@@ -70,7 +70,7 @@ def save_list_data():
 
 #Add and remove item buttons, plus bind
 
-add_item_button = tk.Button(window, text= 'Add', command = list_addition, bg= '#77866A')
+add_item_button = tk.Button(window, text= 'Add', command = list_addition)
 add_item_button.config(bg='#77866A', highlightbackground='#77866A', highlightcolor='#77866A', highlightthickness=1)
 remove_item_button = tk.Button(window, text= 'Remove last item', command = remove_from_list)
 remove_item_button.config(bg='#77866A', highlightbackground='#77866A', highlightcolor='#77866A', highlightthickness=1)
