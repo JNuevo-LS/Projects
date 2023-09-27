@@ -8,11 +8,6 @@ window.configure(background='#77866A', highlightbackground='#77866A', highlightc
 window.overrideredirect(True)
 window.geometry('200x300+200+200')
 
-#Canvas, for the main area of the window
-
-canvas = tk.Canvas(window, bg='#77866A')
-canvas.pack(fill=tk.BOTH, padx=2, pady=4, bd=2)
-
 #Title bar
 
 titlebar = tk.Frame(window, relief='raised', bd=2)
@@ -25,13 +20,18 @@ L = tk.Listbox(window, bg='#77866A', highlightbackground='#77866A', bd=0)
 
 #On open, read and add to listbox
 
-previous_list_data = open(r'listbox_data.txt', 'r')
-previous_lines = previous_list_data.readlines()
-for line in previous_lines:
-    if line == '':
-        previous_lines.pop(line)
-    else:
-        L.insert(tk.END, line)
+if os.path.exists('listbox.txt') == True:
+    previous_list_data = open(r'listbox_data.txt', 'r')
+    previous_lines = previous_list_data.readlines()
+    for line in previous_lines:
+        if line == '':
+            previous_lines.pop(line)
+        else:
+            L.insert(tk.END, line)
+else: 
+    listbox_data = open(r'listbox_data.txt', 'w')
+    listbox_data.close()
+
 
 #Entry
 
