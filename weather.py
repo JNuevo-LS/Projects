@@ -7,6 +7,9 @@ import datetime as dt
 #Class set up to make extracting data from the OpenWeatherMap API's data easier.
 class weather_date:
     def __init__(self, weather_data):
+
+        self.list_of_attributes = ['weather', 'weather_description', 'summaries', 'day_temps', 'min_temps', 'max_temps', 'humidity', 
+                              'feels_like_day', 'feels_like_night', 'wind_speed', 'rain_volume', 'uvindex']
         self.day_temps = []
         self.min_temps = []
         self.max_temps = []
@@ -63,7 +66,7 @@ def readable_date(date_given):
 
 def Update_Weather():
     g = geocoder.ip('me')
-    response = requests.get(f"https://api.openweathermap.org/data/3.0/onecall?lat={g.lat}&lon={g.lng}&units=imperial&exclude=current,hourly,minutely&appid=cab21c27f9c1bbea893d4604a27a6fc3")
+    response = requests.get(f"https://api.openweathermap.org/data/3.0/onecall?lat={g.lat}&lon={g.lng}&units=imperial&exclude=current,hourly,minutely&appid=no")
     raw_data = response.json()
     return raw_data
 
@@ -109,11 +112,21 @@ day6_date.move(815, 50)
 day7_date = create_label(readable_date_list[6])
 day7_date.move(975, 50)
 
+all_data = {}
 
-today_Data = QLabel(text='The temperature today will be ' + str(week_data.day_temps[0]) + ' degrees Fahrenheit', parent = window, wordWrap = True)
-today_Data.setFont(QFont('SansSerif', 7))
-today_Data.resize(120,30)
-today_Data.move(20, 70)
+def perfectly_sized(label_name):
+    return label_name.resize(120,30), label_name.setFont(QFont('SansSerif', 7))
+
+for attribute in week_data.list_of_attributes:
+    attribute_index = week_data.list_of_attributes.index(attribute)
+    list_of_the_attribute = getattr(week_data, attribute)
+    for n, attr_val in enumerate(list_of_the_attribute):
+        attribute_label = QLabel(f"{attribute} of: {attr_val}", parent = window, wordWrap = True)
+        perfectly_sized(attribute_label)
+        attribute_label.move(20+(n*160), 70+(attribute_index*30))
+
+
+
 
 app.setStyle('Fusion')
 
