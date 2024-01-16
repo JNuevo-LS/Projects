@@ -7,6 +7,8 @@ import sys
 import datetime as dt
 import math
 
+#I might rewrite this in a more object-oriented manner on a later date.
+
 #Class set up to make extracting data from the OpenWeatherMap API's data easier.
 class weather_date:
     def __init__(self, weather_data):
